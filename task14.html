@@ -25,12 +25,36 @@
     ];
 
     (function(){
-
         /*
          在注释下方编写代码
          遍历读取aqiData中各个城市的数据
          将空气质量指数大于60的城市显示到aqi-list的列表中
          */
+
+        //dz-2017年2月26日20:16:17
+
+        var $ = function(id){
+          return document.getElementById(id);
+        };
+
+        // sort 默认按照升序排列
+        aqiData.sort(function(value1,value2){
+            return value2[1] - value1[1];
+        });
+
+//        console.log(datas.toLocaleString());
+
+        $("aqi-list").innerHTML = "";
+        var dict = ["一","二","三","四","五"];
+        // 遍历输出 数组迭代方法：every(),filter(),forEach(),map(),some();
+        aqiData.forEach(function(item, index, array){
+            if(item[1] > 60){
+                var li = document.createElement("li");
+                li.innerHTML = "<li>第" + dict[index] + "名:" + item[0] + ", " + item[1];
+                // review 尽量避免循环内appendChild…重排会引起性能下降，对DOM的操作要越少越好，可考虑将ul中内容 保存到临时字符串 最后一次性添加。
+                $("aqi-list").appendChild(li);
+            }
+        })
 
     })();
 
